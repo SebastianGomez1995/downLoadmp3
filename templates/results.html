@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #111;
+            color: #fff;
+            padding-left: 5%;
+            padding-right: 5%;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            max-width: 100vw;
+        }
+        strong{
+            font-size: 30px;
+        }
+        form {
+            width: 100%;
+            max-width: 400px;
+            background: #1e1e1e;
+            border-radius: 8px;
+        }
+        td{
+            font-size: 25px;
+        }
+        th{
+            text-align: left;
+            font-size: 25px;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            width: 95%;
+            background: #2a2a2a;
+            color: #fff;
+        }
+        button {
+            background: #00aaff;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Resultados</h2>
+
+<table>
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Duracion</th>
+      <th>Accion</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for r in resultados %}
+    <tr>
+        <td><strong>{{ r.title }}</strong></td>
+        <td>{{ (r.duration / 60) | round(1) }} min</td>
+        <td>
+            <form action="/download" method="post">
+                <input type="hidden" name="url" value="{{ r.url }}">
+                <button type="submit">Descargar</button>
+            </form>
+        </td>
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+
+</body>
+</html>

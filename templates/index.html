@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube a MP3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #111;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        form {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            background: #1e1e1e;
+            border-radius: 8px;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            width: 95%;
+            background: #2a2a2a;
+            color: #fff;
+        }
+        button {
+            background: #00aaff;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<form action="/search" method="post">
+    <h2>Descargar MP3</h2>
+    
+    <input
+        type="text"
+        name="query"
+        placeholder="Nombre, frase  o link de YouTube"
+        required
+    >
+    <button type="submit">Buscar</button>
+</form>
+
+</body>
+</html>
