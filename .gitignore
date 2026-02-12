@@ -1,4 +1,5 @@
 musica/*
 env/*
 tmp/*
-/readfile.py
+readfile.py
+    
