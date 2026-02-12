@@ -17,6 +17,9 @@ def descargar_mp3(url):
             "match_filter": filtro_duracion,
             "noplaylist": True,
             "windowsfilenames": True,
+            "js_runtimes": {
+                "node": {}
+            },
             "postprocessors": [
                 {
                     "key": "FFmpegExtractAudio",
@@ -34,10 +37,10 @@ def descargar_mp3(url):
         archivo = f"/tmp/{uid}.mp3"
 
         return archivo, f"{titulo}.mp3"
-    except:
+    except Exception as e:
         ROJO = '\033[91m'
         RESET = '\033[0m'
-        print(f"{ROJO}Este texto es rojo.{RESET}")
+        print(f"{ROJO}{e}{RESET}")
         print(url)
     
 def busqueda(texto):
