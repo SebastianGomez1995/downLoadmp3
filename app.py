@@ -39,4 +39,4 @@ def download():
         return f"Error: {e}", 500
 
 
-#app.run(debug=True)
+app.run(debug=True)

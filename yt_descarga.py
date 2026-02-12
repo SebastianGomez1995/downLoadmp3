@@ -1,14 +1,14 @@
 from yt_dlp import YoutubeDL
 import uuid
+import tempfile
+import os
+
 
 def descargar_mp3(url):
-    uid = str(uuid.uuid4())
-    salida = f"/tmp/{uid}.%(ext)s"
-    print(salida)
-    
     try:
+        temp_dir = tempfile.mkdtemp() 
         uid = str(uuid.uuid4())
-        salida = f"/tmp/{uid}.%(ext)s"
+        salida = os.path.join(temp_dir, f"{uid}.%(ext)s")
 
         opciones = {
             "force_ipv4": True,
@@ -26,17 +26,25 @@ def descargar_mp3(url):
                     "preferredcodec": "mp3",
                     "preferredquality": "192",
                 },
+                {"key": "FFmpegMetadata"},   # ← escribe ID3
+                {"key": "EmbedThumbnail"}, 
             ],
+             
             "quiet": True,
         }
 
         with YoutubeDL(opciones) as ydl:
             info = ydl.extract_info(url, download=True)
 
-        titulo = info.get("title", uid)
-        archivo = f"/tmp/{uid}.mp3"
+        archivo = os.path.join(temp_dir, f"{uid}.mp3")
+
+        if not os.path.exists(archivo):
+            raise Exception("No se pudo generar el MP3")
+
+        titulo = info.get("title", "audio")
 
         return archivo, f"{titulo}.mp3"
+
     except Exception as e:
         ROJO = '\033[91m'
         RESET = '\033[0m'
